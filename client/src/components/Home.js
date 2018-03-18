@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
-import axios from 'axios'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Header } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
-class Home extends Component {
-  state = { posts: [] }
-
-  componentDidMount() {
-    axios.get('/api/posts')
-      .then( res => this.setState({ posts: res.data }) )
-  }
-
+class Home extends React.Component {
   render() {
-    return(
-      <div> 
-      <Header as='h1' textAlign='center'>Home Component</Header>
-        { this.state.posts.map( post => 
-            <div key={post.id}>
-              <h2>{post.title}</h2>
-              <h3>{post.body}</h3>
-              <hr />
-            </div>
-          )
-        }
-      </div>
-    );
+    return (
+  <Header textAlign="center" as="h3">
+    Welcome To The<Link to="/posts">Ravings</Link> of {this.props.user.name}
+  </Header>
+    )
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return { user: state.user }
+}
+export default connect(mapStateToProps)(Home)

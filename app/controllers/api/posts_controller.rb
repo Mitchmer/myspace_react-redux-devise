@@ -1,8 +1,9 @@
 class Api::PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :update, :destroy]
   
   def index
-    render json: Post.all.order(created_at: :desc)
+    render json: Post.set_name
   end
 
   def show
@@ -10,7 +11,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    post = Post.create(post_params)
+    post = current_user.posts.create(post_params)
     if post.save
       render json: post
     else
