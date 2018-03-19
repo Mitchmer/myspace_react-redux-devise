@@ -33,6 +33,7 @@ class Api::PostsController < ApplicationController
 
   private
     def set_post
+      Post.set_name
       @post = Post.find(params[:id])
     end
 

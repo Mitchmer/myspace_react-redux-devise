@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { getPosts } from '../actions/posts'
 import Posts from './Posts'
-
+import PostView from './PostView'
 
 class FetchPosts extends React.Component {
 
@@ -15,6 +15,7 @@ class FetchPosts extends React.Component {
     return (
       <div>
         <Route exact path="/posts" component={Posts} />
+        <Route exact path="/posts/:id" component={PostView} />
       </div>
     )
   }

@@ -7,7 +7,7 @@ class Home extends React.Component {
   render() {
     return (
   <Header textAlign="center" as="h3">
-    Welcome To The<Link to="/posts">Ravings</Link> of {this.props.user.name}
+    Welcome To The <Link to="/posts">Ravings</Link> of {this.props.user.name}
   </Header>
     )
   }

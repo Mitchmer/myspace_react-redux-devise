@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Header, Button } from 'semantic-ui-react';
 import { getPosts } from '../actions/posts'
 import PostForm from './PostForm'
+import { Link } from 'react-router-dom'
 
 class Posts extends Component {
   state = { showForm: false }
@@ -19,7 +20,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { showForm } = this.state
+    const { showForm, user } = this.state
     return(
       <div> 
         <Button onClick={this.toggleForm}>
@@ -30,11 +31,15 @@ class Posts extends Component {
           :
           <div>
           <Header as='h1' textAlign='center'>WhineWall</Header>
-          { this.props.posts.map( post => 
+          {  
+            this.props.posts.map( post => 
               <div key={post.id}>
                 <h3>{post.name}</h3>
-                <h2>{post.title}</h2>
+                <Link to={`/posts/${post.id}`}>
+                  {post.title}
+                </Link>
                 <h4>{post.body}</h4>
+           
                 <hr />
               </div>
             )
@@ -47,7 +52,7 @@ class Posts extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { posts: state.posts }
+  return { posts: state.posts, user: state.user.id }
 }
 
 export default connect(mapStateToProps)(Posts);

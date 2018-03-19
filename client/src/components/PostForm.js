@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addPost } from '../actions/posts'
+import { addPost, updatePost } from '../actions/posts'
 import { Form } from 'semantic-ui-react'
 
 class PostForm extends React.Component {
@@ -10,7 +10,7 @@ class PostForm extends React.Component {
   }
   state = {...this.initialState}
 
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.id)
       this.setState({...this.props})
   }
@@ -24,7 +24,8 @@ class PostForm extends React.Component {
     e.preventDefault()
     const post = {...this.state}
     const { dispatch, toggleForm } = this.props
-    dispatch(addPost(post))
+    const func = this.props.id ? updatePost : addPost
+    dispatch(func(post))
     this.setState({...this.initialState})
     toggleForm()
   }
